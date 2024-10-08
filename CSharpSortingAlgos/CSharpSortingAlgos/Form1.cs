@@ -61,9 +61,17 @@ namespace CSharpSortingAlgos
 
         private void btnPause_Click(object sender, EventArgs e)
         {
+            // null check
+            if (bgw == null)
+            {
+                return;
+            }
+
+
             if (!Paused)
             {
-                bgw.CancelAsync(); // pause worker
+                // pause worker
+                bgw.CancelAsync(); 
                 Paused = true;
             }
             else
@@ -89,16 +97,22 @@ namespace CSharpSortingAlgos
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            g = panel1.CreateGraphics(); // creating graphics object
+            // dispose of old instances
+            if (g != null)
+            {
+                g.Dispose();
+            }
 
-            // creating variables to hold the currents state of the array based on the height and width of the pannel
+            g = panel1.CreateGraphics(); 
+
             int NumEntries = panel1.Width;
             int maxVal = panel1.Height;
 
-            arr = new int[NumEntries]; // creating the array
+            arr = new int[NumEntries];
 
-            g.FillRectangle(new System.Drawing.SolidBrush(System.Drawing.Color.Black), 0, 0, NumEntries, maxVal); // creating a black panel background
-            Random rand = new Random(); // creating a random number generator
+            // creating a black panel background
+            g.FillRectangle(new System.Drawing.SolidBrush(System.Drawing.Color.Black), 0, 0, NumEntries, maxVal); 
+            Random rand = new Random();
 
             // initializing each memeber of the array to a random number between 0 and the max number
             for (int i = 0; i < NumEntries; i++)
@@ -119,10 +133,10 @@ namespace CSharpSortingAlgos
             BackgroundWorker bgw = sender as BackgroundWorker;
 
             // extract the name of the sorting algo to use
-            string SortEgineName = (string)e.Argument;
+            string SortEngineName = (string)e.Argument;
 
             // figure out the type of the class that will implement the algo
-            Type type = Type.GetType("CSharpSortingAlgos." + SortEgineName);
+            Type type = Type.GetType("CSharpSortingAlgos." + SortEngineName);
 
             // get the constructors of that type
             var ctors = type.GetConstructors();
@@ -137,11 +151,11 @@ namespace CSharpSortingAlgos
                     se.NextStep();
                 }
             }
-            catch (Exception  ex)
+            catch (Exception ex)
             {
-
-
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
     }
 }

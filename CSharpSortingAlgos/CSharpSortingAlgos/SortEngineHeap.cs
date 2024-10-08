@@ -9,16 +9,14 @@ namespace CSharpSortingAlgos
 {
     internal class SortEngineHeap : ISortEngine
     {
-        // variables
-        private int[] arr; // copy of the array
-        private Graphics g; // graphics object
-        private int maxVal; // maximum value integer
+        private int[] arr;
+        private Graphics g;
+        private int maxVal;
 
         // using bursh to draw white and black rectangles into the graphics object
         Brush WhiteBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
         Brush BlackBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
 
-        // constructor
         public SortEngineHeap(int[] arr_In, Graphics g_In, int maxVal_In)
         {
             arr = arr_In;

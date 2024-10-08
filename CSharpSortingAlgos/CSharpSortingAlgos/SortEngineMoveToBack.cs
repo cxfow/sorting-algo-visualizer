@@ -9,10 +9,9 @@ namespace CSharpSortingAlgos
 {
     internal class SortEngineMoveToBack : ISortEngine
     {
-        // variables
-        private readonly int[] arr; // copy of the array
-        private Graphics g; // graphics object
-        private readonly int maxVal; // maximum value integer
+        private readonly int[] arr;
+        private Graphics g;
+        private readonly int maxVal;
 
         private int CurrentListPointer = 0;
 
